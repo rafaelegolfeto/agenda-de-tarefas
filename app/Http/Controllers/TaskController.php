@@ -9,6 +9,11 @@ use Inertia\Inertia;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function create()
     {
         return Inertia::render('Tasks/Create');
