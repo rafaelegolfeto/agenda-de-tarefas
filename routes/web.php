@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\TaskController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +35,6 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
