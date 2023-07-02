@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Inertia\Inertia;
 
 class Task extends Model
 {
@@ -13,7 +14,5 @@ class Task extends Model
         'title',
         'description',
         'due_date',
-        'image',
-        'priority',
     ];
 }
