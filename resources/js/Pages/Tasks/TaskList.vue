@@ -14,9 +14,13 @@
                         Prazo <time :datetime="task.due_date">{{ task.due_date }}</time>
                     </p>
                 </div>
-                <div>
+                <div class="flex gap-x-2">
                     <button
-                        class="bg-green-500 hover:bg-green-600 text-white font-semibold py-1 px-2 rounded-sm text-xs focus:outline-none focus:shadow-outline h-8 px-3">
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 rounded-sm text-xs focus:outline-none focus:shadow-outline h-6">
+                        Detalhes
+                    </button>
+                    <button
+                        class="bg-green-500 hover:bg-green-600 text-white font-semibold py-1 px-2 rounded-sm text-xs focus:outline-none focus:shadow-outline h-6">
                         Concluída
                     </button>
                 </div>
