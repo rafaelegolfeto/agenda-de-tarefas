@@ -24,6 +24,8 @@
 import { route } from '@inertiajs/inertia';
 import { usePage } from '@inertiajs/inertia-vue3';
 
+const { router } = usePage().props;
+
 const props = defineProps({
     tasks: Array, // Recebe a lista de tarefas do controlador
 });

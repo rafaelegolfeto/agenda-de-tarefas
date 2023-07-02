@@ -23,6 +23,8 @@ Route::middleware(['auth:sanctum', 'verified', 'web'])->group(function () {
     Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');  
     Route::get('/tasks/tasklist', [TaskController::class, 'tasklist'])->name('tasks.tasklist');
-    
-});
+    Route::get('/tasks/taskdetails/{id}', [TaskController::class, 'show'])->name('tasks.show');
+    Route::post('/tasks/mark-completed/{id}', [TaskController::class, 'markCompleted'])->name('tasks.markCompleted');
+    Route::delete('/tasks/{id}', [TaskController::class, 'delete'])->name('tasks.delete');    
+}); 
 

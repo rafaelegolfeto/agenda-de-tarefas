@@ -48,4 +48,27 @@ class TaskController extends Controller
 
         return Inertia::render('Tasks/TaskList', ['tasks' => $tasks]);
     }
+
+    public function show($id)
+    {
+        $task = Task::findOrFail($id);
+        return Inertia::render('Tasks/TaskDetails', ['task' => $task]);
+    }
+
+    public function markCompleted($id)
+    {
+        $task = Task::findOrFail($id);
+        $task->completed = true;
+        $task->save();
+
+        return redirect()->back();
+    }
+
+    public function delete($id)
+    {
+        $task = Task::findOrFail($id);
+        $task->delete();
+
+        return redirect()->route('tasks.tasklist');
+    }
 }
