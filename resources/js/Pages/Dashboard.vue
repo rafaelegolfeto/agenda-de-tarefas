@@ -8,7 +8,7 @@ import Create from '@/Pages/Tasks/Create.vue';
     <AppLayout title="Dashboard">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Dashboard
+                Bem-Vindo ao Gerenciador de Tarefas
             </h2>
         </template>
 
