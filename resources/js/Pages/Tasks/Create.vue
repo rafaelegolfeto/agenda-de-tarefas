@@ -17,13 +17,13 @@ function submit() {
 
 <template>
     <div class="max-w-md mx-auto mt-8">
-        <inertia-link :href="route('dashboard')"
+        <!-- <inertia-link :href="route('dashboard')"
             class="flex items-center text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                 class="w-4 h-4 mr-1">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
                 </path>
-            </svg></inertia-link>
+            </svg></inertia-link> -->
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="submit">
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Título:</label>

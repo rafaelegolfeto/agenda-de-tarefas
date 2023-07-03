@@ -1,6 +1,6 @@
 <template>
     <div class="max-w-md mx-auto mt-8">
-        <inertia-link :href="route('tasks.create')"
+        <inertia-link :href="route('dashboard')"
             class="flex items-center text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                 class="w-4 h-4 mr-1">
