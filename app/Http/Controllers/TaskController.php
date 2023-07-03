@@ -43,9 +43,7 @@ class TaskController extends Controller
 
     public function tasklist()
     {
-        $tasks = Task::orderBy('due_date')
-            ->get();
-
+        $tasks = Task::orderBy('due_date')->get();
         return Inertia::render('Tasks/TaskList', ['tasks' => $tasks]);
     }
 
