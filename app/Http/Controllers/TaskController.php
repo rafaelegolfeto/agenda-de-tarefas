@@ -37,7 +37,9 @@ class TaskController extends Controller
 
         $task->save();
 
-        return response()->json(['success' => true, 'url' => route('tasks.tasklist')]);
+        // return response()->json(['success' => true, 'url' => route('tasks.tasklist')]);
+        return response()->json(['message' => 'Tarefa criada com sucesso!', 'url' => route('tasks.tasklist')]);
+
         // return redirect()->route('tasks.tasklist');
     }
 
