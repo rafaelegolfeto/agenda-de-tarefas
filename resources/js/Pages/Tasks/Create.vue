@@ -2,6 +2,12 @@
 import { reactive } from 'vue'
 import { router } from '@inertiajs/vue3'
 import { usePage, useRoute, InertiaLink } from '@inertiajs/inertia-vue3';
+import AppLayout from '@/Layouts/AppLayout.vue';
+import Dropdown from '@/Components/Dropdown.vue';
+import DropdownLink from '@/Components/DropdownLink.vue';
+import NavLink from '@/Components/NavLink.vue';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+
 
 const form = reactive({
     title: null,
@@ -16,15 +22,47 @@ function submit() {
 </script>
 
 <template>
+     <div>
+        <nav class="bg-white border-b border-gray-100">
+                <!-- Primary Navigation Menu -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-center h-16">
+                        <div class="flex">
+                            <!-- Navigation Links -->
+                            <div class="hidden space-x-8 sm:-my-px ml-0 sm:flex">
+                                <NavLink :href="route('dashboard')">
+                                    Dashboard
+                                </NavLink>
+                                <NavLink :href="route('tasks.create')" :active="route().current('tasks.create')">
+                                    Criar Tarefas
+                                </NavLink>
+                                <NavLink :href="route('tasks.tasklist')">
+                                    Listas de Tarefas
+                                </NavLink>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Responsive Navigation Menu -->
+                <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
+                    <div class="pt-2 pb-3 space-y-1">
+                        <ResponsiveNavLink :href="route('dashboard')">
+                            Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('tasks.create')" :active="route().current('tasks.create')">
+                            Criar Tarefas
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('tasks.tasklist')">
+                            Listas de Tarefas
+                        </ResponsiveNavLink>
+                    </div>
+                </div>
+            </nav>
+
+    </div>
     <div class="max-w-md mx-auto mt-8">
-        <!-- <inertia-link :href="route('dashboard')"
-            class="flex items-center text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                class="w-4 h-4 mr-1">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
-                </path>
-            </svg></inertia-link> -->
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="submit">
+              <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="submit">
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Título:</label>
                 <input

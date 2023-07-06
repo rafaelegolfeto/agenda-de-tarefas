@@ -1,12 +1,73 @@
+<script setup>
+import { usePage, useRoute, InertiaLink } from '@inertiajs/inertia-vue3';
+import AppLayout from '@/Layouts/AppLayout.vue';
+import Dropdown from '@/Components/Dropdown.vue';
+import DropdownLink from '@/Components/DropdownLink.vue';
+import NavLink from '@/Components/NavLink.vue';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+
+
+const props = defineProps({
+    tasks: Array, // Recebe a lista de tarefas do controlador
+});
+
+const toggleTaskCompleted = (taskId) => {
+    const taskIndex = props.tasks.findIndex(task => task.id === taskId);
+    if (taskIndex !== -1) {
+        props.tasks[taskIndex].completed = !props.tasks[taskIndex].completed;
+    }
+};
+</script>
+  
+<style scoped>
+.line-through {
+    text-decoration: line-through;
+}
+</style>
+
+
+
 <template>
+    <div>
+        <nav class="bg-white border-b border-gray-100">
+                <!-- Primary Navigation Menu -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-center h-16">
+                        <div class="flex">
+                            <!-- Navigation Links -->
+                            <div class="hidden space-x-8 sm:-my-px ml-0 sm:flex">
+                                <NavLink :href="route('dashboard')">
+                                    Dashboard
+                                </NavLink>
+                                <NavLink :href="route('tasks.create')">
+                                    Criar Tarefas
+                                </NavLink>
+                                <NavLink :href="route('tasks.tasklist')" :active="route().current('tasks.tasklist')">
+                                    Listas de Tarefas
+                                </NavLink>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Responsive Navigation Menu -->
+                <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
+                    <div class="pt-2 pb-3 space-y-1">
+                        <ResponsiveNavLink :href="route('dashboard')">
+                            Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('tasks.create')">
+                            Criar Tarefas
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('tasks.tasklist')" :active="route().current('tasks.tasklist')">
+                            Listas de Tarefas
+                        </ResponsiveNavLink>
+                    </div>
+                </div>
+            </nav>
+
+    </div>
     <div class="max-w-md mx-auto mt-8">
-        <inertia-link :href="route('dashboard')"
-            class="flex items-center text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                class="w-4 h-4 mr-1">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
-                </path>
-            </svg></inertia-link>
         <ul role="list" class="divide-y divide-gray-100">
             <li v-for="task in tasks" :key="task.id" class="flex justify-between gap-x-6 py-5">
                 <div class="flex gap-x-4">
@@ -18,7 +79,7 @@
                     </div>
                 </div>
                 <div class="hidden sm:flex sm:flex-col sm:items-end">
-                    <p class="text-sm leading-6 text-gray-900">DIFÍCIL</p>
+                    <!-- <p class="text-sm leading-6 text-gray-900">DIFÍCIL</p> -->
                     <p class="mt-1 text-xs leading-5 text-gray-500">
                         Prazo <time :datetime="task.due_date">{{ task.due_date }}</time>
                     </p>
@@ -38,24 +99,3 @@
         </ul>
     </div>
 </template>
-  
-<script setup>
-import { usePage, useRoute, InertiaLink } from '@inertiajs/inertia-vue3';
-
-const props = defineProps({
-    tasks: Array, // Recebe a lista de tarefas do controlador
-});
-
-const toggleTaskCompleted = (taskId) => {
-    const taskIndex = props.tasks.findIndex(task => task.id === taskId);
-    if (taskIndex !== -1) {
-        props.tasks[taskIndex].completed = !props.tasks[taskIndex].completed;
-    }
-};
-</script>
-  
-<style scoped>
-.line-through {
-    text-decoration: line-through;
-}
-</style>
