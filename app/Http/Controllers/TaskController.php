@@ -63,6 +63,7 @@ class TaskController extends Controller
         return Inertia::render('Tasks/TaskDetails', ['task' => $task]);
     }
 
+    
     public function markCompleted($id)
     {
         $task = Task::findOrFail($id);

@@ -1,26 +1,3 @@
-<!-- <script setup>
-import { usePage, useRoute, InertiaLink, useRemember } from '@inertiajs/inertia-vue3';
-import AppLayout from '@/Layouts/AppLayout.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-
-
-const props = defineProps({
-    tasks: Array, // Recebe a lista de tarefas do controlador
-});
-
-const tasks = useRemember(props.tasks);
-
-const toggleTaskCompleted = (taskId) => {
-  const task = tasks.find(task => task.id === taskId);
-  if (task) {
-    task.completed = !task.completed;
-  }
-};
-</script> -->
-  
 <script setup>
 import { usePage, useRoute, InertiaLink } from '@inertiajs/inertia-vue3';
 import { useRemember } from '@inertiajs/inertia-vue3';

@@ -44,6 +44,7 @@ const markAsCompleted = async () => {
     }
 };
 
+
 const deleteTask = async () => {
     if (confirm('Tem certeza de que deseja excluir esta tarefa?')) {
         try {
