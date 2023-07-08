@@ -20,12 +20,11 @@ Route::middleware(['auth:sanctum', 'verified', 'web'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+    // Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+    Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create')->middleware('auth');
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');  
     Route::get('/tasks/tasklist', [TaskController::class, 'tasklist'])->name('tasks.tasklist');
     Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
     Route::post('/tasks/{id}/mark-completed', [TaskController::class, 'markCompleted'])->name('tasks.markCompleted');
     // Route::delete('/tasks/{id}', [TaskController::class, 'delete'])->name('tasks.delete');    
 });
-  
-

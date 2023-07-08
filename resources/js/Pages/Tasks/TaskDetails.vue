@@ -11,6 +11,7 @@
                 @click="markAsCompleted">
                 Marcar como Concluída
             </button>
+
             <button v-if="task.completed"
                 class="bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-default"
                 disabled>
@@ -35,7 +36,7 @@ const props = defineProps({
 
 const markAsCompleted = async () => {
     try {
-        await $inertia.post(route('tasks.markCompleted', { id: props.task.id }));
+        await $inertia.post(`/tasks/${props.task.id}/mark-completed`);
         props.task.completed = true;
     } catch (error) {
         console.error(error);
@@ -54,5 +55,4 @@ const deleteTask = async () => {
         }
     }
 };
-</script>
-  
+</script>  
