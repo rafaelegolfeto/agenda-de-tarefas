@@ -7,6 +7,7 @@ use App\Models\User;
 // use Illuminate\Console\View\Components\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class TaskController extends Controller
@@ -33,10 +34,10 @@ class TaskController extends Controller
         $task->due_date = $request->input('due_date');
         $task->user_id = Auth::id();
 
-        // if ($request->hasFile('image')) {
-        //     $imagePath = $request->file('image')->store('public/images');
-        //     $task->image = $imagePath;
-        // }
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('public/images');
+            $task->image_path = Storage::url($imagePath);
+        }
 
         $task->save();
 

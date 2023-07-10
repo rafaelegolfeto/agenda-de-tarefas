@@ -19,6 +19,11 @@ const form = reactive({
 function submit() {
     router.post('/tasks', form)
 }
+
+function onFileChange(event) {
+    form.image = event.target.files[0];
+}
+
 </script>
 
 <template>

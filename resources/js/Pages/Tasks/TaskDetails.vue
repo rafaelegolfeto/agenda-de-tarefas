@@ -3,7 +3,8 @@
         <h2 class="text-lg font-semibold mb-4">{{ task.title }}</h2>
         <p class="text-gray-500 mb-4">Data de Vencimento: {{ task.due_date }}</p>
         <p class="mb-4">{{ task.description }}</p>
-        <img v-if="task.image" :src="task.image" alt="Imagem da Tarefa" class="w-full mb-4" />
+        <img v-if="task.image_path" :src="task.image_path" alt="Imagem da Tarefa" class="w-full mb-4" />
+
 
         <div class="flex items-center gap-x-4">
             <button v-if="!task.completed"
