@@ -24,6 +24,7 @@
                 Excluir Tarefa
             </button>
         </div>
+        
     </div>
 </template>
   

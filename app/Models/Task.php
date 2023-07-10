@@ -17,6 +17,7 @@ class Task extends Model
         'due_date',
         'completed',
         'image_path',
+        
     ];
 
     public function user()
