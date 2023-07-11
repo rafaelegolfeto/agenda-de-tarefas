@@ -2,16 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TaskReminder;
 use App\Models\Task;
 use App\Models\User;
+use Carbon\Carbon;
 // use Illuminate\Console\View\Components\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class TaskController extends Controller
 {
+
+
+    public function sendReminderEmail(Task $task)
+    {
+        Mail::to($task->user->email)->send(new TaskReminder($task));
+
+        return response()->json(['message' => 'E-mail de lembrete enviado com sucesso!']);
+    }
+
     public function create()
     {
         // dd('Caiu aqui');
@@ -40,6 +52,12 @@ class TaskController extends Controller
         }
 
         $task->save();
+
+        $dueDate = Carbon::parse($task->due_date);
+
+        if ($dueDate->diffInHours(Carbon::now()) <= 24) {
+            $this->sendReminderEmail($task);
+        }
 
         // return response()->json(['success' => true, 'url' => route('tasks.tasklist')]);
         return response()->json(['message' => 'Tarefa criada com sucesso!', 'url' => route('tasks.tasklist')]);
@@ -83,5 +101,4 @@ class TaskController extends Controller
 
         return redirect()->route('tasks.tasklist');
     }
-    
 }
