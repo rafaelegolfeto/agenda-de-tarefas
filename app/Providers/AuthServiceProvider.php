@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Task;
 use App\Policies\TaskPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -26,8 +27,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        $this->app->make(\Illuminate\Contracts\Auth\Access\Gate::class)->resource('task', TaskPolicy::class);
+        // $this->app->make(\Illuminate\Contracts\Auth\Access\Gate::class)->resource('task', TaskPolicy::class);
 
-        // Resto do código...
+        Gate::resource('tasks', TaskPolicy::class);
+
     }
 }

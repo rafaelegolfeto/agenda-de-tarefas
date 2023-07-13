@@ -82,7 +82,7 @@ class TaskController extends Controller
         return Inertia::render('Tasks/TaskDetails', ['task' => $task]);
     }
 
-    
+
     public function markCompleted($id)
     {
         $task = Task::findOrFail($id);
@@ -93,12 +93,16 @@ class TaskController extends Controller
         return redirect()->back();
     }
 
-
-    public function delete($id)
+    public function destroy($id)
     {
-        $task = Task::findOrFail($id);
-        $task->delete();
 
-        return redirect()->route('tasks.tasklist');
+        // dd('Caiu aqui');
+        $task = Task::find($id);
+        if ($task) {
+            $task->delete();
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['error' => 'Tarefa não encontrada']);
+        }
     }
 }
