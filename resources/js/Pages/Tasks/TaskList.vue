@@ -9,17 +9,17 @@ import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
 const props = defineProps({
-  tasks: Array, // Recebe a lista de tarefas do controlador
+    tasks: Array, // Recebe a lista de tarefas do controlador
 });
 
 const tasks = useRemember(props.tasks);
 
 const toggleTaskCompleted = (taskId) => {
-  const task = tasks.find((task) => task.id === taskId);
-  if (task) {
-    const updatedTask = { ...task, completed: !task.completed };
-    Inertia.post(`/tasks/${taskId}/mark-completed`, updatedTask);
-  }
+    const task = tasks.find((task) => task.id === taskId);
+    if (task) {
+        const updatedTask = { ...task, completed: !task.completed };
+        Inertia.post(`/tasks/${taskId}/mark-completed`, updatedTask);
+    }
 };
 </script>
 
@@ -37,41 +37,41 @@ const toggleTaskCompleted = (taskId) => {
 <template>
     <div>
         <nav class="bg-white border-b border-gray-100">
-                <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-center h-16">
-                        <div class="flex">
-                            <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px ml-0 sm:flex">
-                                <NavLink :href="route('dashboard')">
-                                    Dashboard
-                                </NavLink>
-                                <NavLink :href="route('tasks.create')">
-                                    Criar Tarefas
-                                </NavLink>
-                                <NavLink :href="route('tasks.tasklist')" :active="route().current('tasks.tasklist')">
-                                    Listas de Tarefas
-                                </NavLink>
-                            </div>
+            <!-- Primary Navigation Menu -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-center h-16">
+                    <div class="flex">
+                        <!-- Navigation Links -->
+                        <div class="hidden space-x-8 sm:-my-px ml-0 sm:flex">
+                            <NavLink :href="route('dashboard')">
+                                Dashboard
+                            </NavLink>
+                            <NavLink :href="route('tasks.create')">
+                                Criar Tarefas
+                            </NavLink>
+                            <NavLink :href="route('tasks.tasklist')" :active="route().current('tasks.tasklist')">
+                                Listas de Tarefas
+                            </NavLink>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Responsive Navigation Menu -->
-                <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
-                    <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')">
-                            Dashboard
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('tasks.create')">
-                            Criar Tarefas
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('tasks.tasklist')" :active="route().current('tasks.tasklist')">
-                            Listas de Tarefas
-                        </ResponsiveNavLink>
-                    </div>
+            <!-- Responsive Navigation Menu -->
+            <div :class="{ 'block': showingNavigationDropdown, 'hidden': !showingNavigationDropdown }" class="sm:hidden">
+                <div class="pt-2 pb-3 space-y-1">
+                    <ResponsiveNavLink :href="route('dashboard')">
+                        Dashboard
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink :href="route('tasks.create')">
+                        Criar Tarefas
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink :href="route('tasks.tasklist')" :active="route().current('tasks.tasklist')">
+                        Listas de Tarefas
+                    </ResponsiveNavLink>
                 </div>
-            </nav>
+            </div>
+        </nav>
 
     </div>
     <div class="max-w-md mx-auto mt-8">

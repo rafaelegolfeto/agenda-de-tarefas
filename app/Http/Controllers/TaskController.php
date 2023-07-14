@@ -6,10 +6,10 @@ use App\Mail\TaskReminder;
 use App\Models\Task;
 use App\Models\User;
 use Carbon\Carbon;
-// use Illuminate\Console\View\Components\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -26,13 +26,11 @@ class TaskController extends Controller
 
     public function create()
     {
-        // dd('Caiu aqui');
         return Inertia::render('Tasks/Create');
     }
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -59,10 +57,7 @@ class TaskController extends Controller
             $this->sendReminderEmail($task);
         }
 
-        // return response()->json(['success' => true, 'url' => route('tasks.tasklist')]);
         return response()->json(['message' => 'Tarefa criada com sucesso!', 'url' => route('tasks.tasklist')]);
-
-        // return redirect()->route('tasks.tasklist');
     }
 
     public function tasklist()
@@ -74,8 +69,6 @@ class TaskController extends Controller
 
     public function show($id)
     {
-        // $task = Task::findOrFail($id);
-        // return Inertia::render('Tasks/TaskDetails', ['task' => $task]);
 
         $task = Task::findOrFail($id);
         $this->authorize('view', $task); // Verifica se o usuário tem permissão para visualizar a tarefa
@@ -93,10 +86,52 @@ class TaskController extends Controller
         return redirect()->back();
     }
 
+    public function edit($id)
+    {
+        $task = Task::findOrFail($id);
+        $this->authorize('view', $task); // Verifica se o usuário tem permissão para editar a tarefa
+
+        return Inertia::render('Tasks/Edit', [
+            'task' => $task
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $task = Task::findOrFail($id);
+        $this->authorize('update', $task); // Verifica se o usuário tem permissão para atualizar a tarefa
+
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'due_date' => 'required|date',
+        ]);
+
+        $task->title = $request->input('title');
+        $task->description = $request->input('description');
+        $task->due_date = $request->input('due_date');
+
+        
+        if ($request->hasFile('image')) {
+            // Delete a imagem antiga, se existir
+            if ($task->image_path) {
+                Storage::delete($task->image_path);
+            }
+        
+            $imagePath = $request->file('image')->store('public/images');
+            $task->image_path = Storage::url($imagePath);
+        }
+
+
+        $task->save();
+
+        return redirect()->route('tasks.show', ['id' => $task->id]);
+    }
+
+
     public function destroy($id)
     {
 
-        // dd('Caiu aqui');
         $task = Task::find($id);
         if ($task) {
             $task->delete();

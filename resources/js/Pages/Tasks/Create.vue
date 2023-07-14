@@ -28,47 +28,47 @@ function onFileChange(event) {
 </script>
 
 <template>
-     <div>
+    <div>
         <nav class="bg-white border-b border-gray-100">
-                <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-center h-16">
-                        <div class="flex">
-                            <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px ml-0 sm:flex">
-                                <NavLink :href="route('dashboard')">
-                                    Dashboard
-                                </NavLink>
-                                <NavLink :href="route('tasks.create')" :active="route().current('tasks.create')">
-                                    Criar Tarefas
-                                </NavLink>
-                                <NavLink :href="route('tasks.tasklist')">
-                                    Listas de Tarefas
-                                </NavLink>
-                            </div>
+            <!-- Primary Navigation Menu -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-center h-16">
+                    <div class="flex">
+                        <!-- Navigation Links -->
+                        <div class="hidden space-x-8 sm:-my-px ml-0 sm:flex">
+                            <NavLink :href="route('dashboard')">
+                                Dashboard
+                            </NavLink>
+                            <NavLink :href="route('tasks.create')" :active="route().current('tasks.create')">
+                                Criar Tarefas
+                            </NavLink>
+                            <NavLink :href="route('tasks.tasklist')">
+                                Listas de Tarefas
+                            </NavLink>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Responsive Navigation Menu -->
-                <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
-                    <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')">
-                            Dashboard
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('tasks.create')" :active="route().current('tasks.create')">
-                            Criar Tarefas
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('tasks.tasklist')">
-                            Listas de Tarefas
-                        </ResponsiveNavLink>
-                    </div>
+            <!-- Responsive Navigation Menu -->
+            <div :class="{ 'block': showingNavigationDropdown, 'hidden': !showingNavigationDropdown }" class="sm:hidden">
+                <div class="pt-2 pb-3 space-y-1">
+                    <ResponsiveNavLink :href="route('dashboard')">
+                        Dashboard
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink :href="route('tasks.create')" :active="route().current('tasks.create')">
+                        Criar Tarefas
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink :href="route('tasks.tasklist')">
+                        Listas de Tarefas
+                    </ResponsiveNavLink>
                 </div>
-            </nav>
+            </div>
+        </nav>
 
     </div>
     <div class="max-w-md mx-auto mt-8">
-              <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="submit">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="submit">
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Título:</label>
                 <input
